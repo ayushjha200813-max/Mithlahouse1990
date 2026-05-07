@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mithla Light Tent House — Since 1990</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --gold2: #FFD700;
+      --dark: #1a0a00;
+      --dark2: #2d1500;
+      --red: #c0392b;
+      --cream: #FFF8F0;
+      --white: #ffffff;
+      --gray: #636e72;
+      --pink: #e91e63;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Poppins',sans-serif; background:var(--cream); color:var(--dark); overflow-x:hidden; }
+
+    /* ===== PRELOADER ===== */
+    #preloader {
+      position:fixed; inset:0; background:var(--dark);
+      display:flex; align-items:center; justify-content:center;
+      z-index:99999; transition:opacity 0.6s, visibility 0.6s;
+    }
+    #preloader.hide { opacity:0; visibility:hidden; }
+    .preloader-inner { text-align:center; }
+    .preloader-logo {
+      font-family:'Playfair Display',serif;
+      font-size:3rem; font-weight:900;
+      color:var(--gold);
+      animation: pulse 1s infinite alternate;
+    }
+    .preloader-sub { color:#aaa; margin-top:0.5rem; letter-spacing:3px; font-size:0.85rem; }
+    .loader-bar {
+      width:200px; height:3px; background:#333;
+      border-radius:3px; margin:1.5rem auto 0;
+      overflow:hidden;
+    }
+    .loader-fill {
+      height:100%; background:linear-gradient(90deg, var(--gold), var(--gold2));
+      animation: load 1.8s ease-in-out forwards;
+    }
+    @keyframes load { from{width:0} to{width:100%} }
+    @keyframes pulse { from{opacity:0.7} to{opacity:1} }
+
+    /* ===== PARTICLES ===== */
+    #particles { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+    .particle {
+      position:absolute; width:4px; height:4px;
+      background:var(--gold); border-radius:50%;
+      opacity:0; animation: float linear infinite;
+    }
+    @keyframes float {
+      0%{transform:translateY(100vh) rotate(0deg); opacity:0.6}
+      100%{transform:translateY(-100px) rotate(720deg); opacity:0}
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position:fixed; top:0; left:0; right:0;
+      z-index:1000;
+      background:rgba(26,10,0,0.95);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(212,175,55,0.3);
+      transition:all 0.3s;
+    }
+    header.scrolled { box-shadow:0 4px 30px rgba(0,0,0,0.5); }
+    .header-inner {
+      max-width:1300px; margin:0 auto;
+      padding:0 2rem;
+      display:flex; align-items:center; justify-content:space-between;
+      height:75px;
+    }
+    .logo {
+      font-family:'Playfair Display',serif;
+      font-size:1.6rem; font-weight:900;
+      color:var(--gold);
+      text-decoration:none;
+      display:flex; align-items:center; gap:0.6rem;
+    }
+    .logo span { color:var(--white); font-size:0.85rem; font-weight:400; font-family:'Poppins',sans-serif; display:block; letter-spacing:2px; }
+    .logo-text { display:flex; flex-direction:column; }
+    nav { display:flex; gap:1.5rem; align-items:center; }
+    nav a {
+      color:#FFE0B2; text-decoration:none;
+      font-weight:600; font-size:0.9rem;
+      transition:color 0.2s; position:relative;
+    }
+    nav a::after {
+      content:''; position:absolute; bottom:-4px; left:0;
+      width:0; height:2px; background:var(--gold);
+      transition:width 0.3s;
+    }
+    nav a:hover { color:var(--gold); }
+    nav a:hover::after { width:100%; }
+    .nav-admin { background:var(--gold); color:var(--dark) !important; padding:0.45rem 1.1rem; border-radius:25px; font-weight:700 !important; }
+    .nav-admin::after { display:none !important; }
+    .hamburger { display:none; background:none; border:none; color:var(--gold); font-size:1.5rem; cursor:pointer; }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height:100vh; position:relative;
+      display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg, #1a0a00 0%, #3d1c00 50%, #1a0a00 100%);
+      overflow:hidden;
+    }
+    .hero-bg-pattern {
+      position:absolute; inset:0;
+      background-image: radial-gradient(circle at 20% 50%, rgba(212,175,55,0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,215,0,0.1) 0%, transparent 40%);
+    }
+    .hero-content {
+      position:relative; z-index:2;
+      text-align:center; padding:2rem;
+      max-width:900px;
+    }
+    .hero-badge {
+      display:inline-block;
+      background:rgba(212,175,55,0.15);
+      border:1px solid rgba(212,175,55,0.4);
+      color:var(--gold);
+      padding:0.4rem 1.5rem;
+      border-radius:25px;
+      font-size:0.85rem;
+      font-weight:600;
+      letter-spacing:2px;
+      margin-bottom:1.5rem;
+      animation: fadeInDown 0.8s ease both;
+    }
+    .hero h1 {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.5rem,6vw,5rem);
+      font-weight:900; color:var(--white);
+      line-height:1.1; margin-bottom:1rem;
+      animation: fadeInUp 0.9s ease 0.2s both;
+    }
+    .hero h1 span { color:var(--gold); }
+    .hero p {
+      font-size:1.2rem; color:#FFE0B2;
+      margin-bottom:2.5rem;
+      animation: fadeInUp 0.9s ease 0.4s both;
+    }
+    .hero-stats {
+      display:flex; justify-content:center; gap:3rem;
+      margin:2.5rem 0;
+      animation: fadeInUp 0.9s ease 0.5s both;
+    }
+    .stat { text-align:center; }
+    .stat-num {
+      font-size:2.8rem; font-weight:900;
+      font-family:'Playfair Display',serif;
+      color:var(--gold);
+    }
+    .stat-label { color:#FFE0B2; font-size:0.85rem; }
+    .hero-btns {
+      display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
+      animation: fadeInUp 0.9s ease 0.6s both;
+    }
+    .btn {
+      padding:1rem 2.2rem; border-radius:50px;
+      font-weight:700; font-size:1rem;
+      cursor:pointer; border:none;
+      transition:all 0.3s;
+      display:inline-flex; align-items:center; gap:0.6rem;
+      text-decoration:none;
+      font-family:'Poppins',sans-serif;
+    }
+    .btn-gold { background:linear-gradient(135deg, var(--gold), var(--gold2)); color:var(--dark); }
+    .btn-gold:hover { transform:translateY(-4px); box-shadow:0 15px 35px rgba(212,175,55,0.4); }
+    .btn-outline { background:transparent; color:var(--white); border:2px solid rgba(255,255,255,0.5); }
+    .btn-outline:hover { background:var(--white); color:var(--dark); transform:translateY(-4px); }
+
+    /* ===== SCROLL INDICATOR ===== */
+    .scroll-indicator {
+      position:absolute; bottom:2rem; left:50%;
+      transform:translateX(-50%);
+      color:var(--gold); font-size:1.5rem;
+      animation: bounce 2s infinite;
+      cursor:pointer;
+    }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-10px)} }
+
+    /* ===== FESTIVAL BANNER ===== */
+    #festivalBanner {
+      background:linear-gradient(135deg, #c0392b, #9b2226);
+      color:white; text-align:center;
+      padding:1rem 3rem;
+      font-weight:700; font-size:1rem;
+      display:none; position:relative;
+      animation: slideDown 0.5s ease;
+    }
+    #festivalBanner.active { display:block; }
+    .banner-close { position:absolute; right:1.5rem; top:50%; transform:translateY(-50%); background:none; border:none; color:white; font-size:1.3rem; cursor:pointer; }
+    @keyframes slideDown { from{transform:translateY(-100%)} to{transform:translateY(0)} }
+
+    /* ===== SECTION STYLES ===== */
+    .section { padding:6rem 2rem; position:relative; z-index:1; }
+    .section-dark { background:linear-gradient(135deg, var(--dark), var(--dark2)); color:white; }
+    .section-light { background:var(--cream); }
+    .section-white { background:var(--white); }
+    .container { max-width:1200px; margin:0 auto; }
+    .section-head { text-align:center; margin-bottom:4rem; }
+    .section-tag {
+      display:inline-block;
+      background:rgba(212,175,55,0.1);
+      border:1px solid rgba(212,175,55,0.3);
+      color:var(--gold);
+      padding:0.3rem 1rem;
+      border-radius:25px;
+      font-size:0.8rem;
+      font-weight:600;
+      letter-spacing:2px;
+      margin-bottom:1rem;
+    }
+    .section-title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2rem,4vw,3rem);
+      font-weight:900;
+      margin-bottom:1rem;
+    }
+    .section-title span { color:var(--gold); }
+    .section-sub { color:var(--gray); font-size:1.05rem; }
+    .section-dark .section-sub { color:#aaa; }
+
+    /* ===== ABOUT STRIP ===== */
+    .about-strip {
+      background:linear-gradient(135deg, var(--gold), var(--gold2));
+      padding:2.5rem 2rem;
+    }
+    .about-strip-inner {
+      max-width:1200px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:2rem; flex-wrap:wrap;
+    }
+    .about-strip h2 {
+      font-family:'Playfair Display',serif;
+      font-size:2rem; font-weight:900;
+      color:var(--dark);
+    }
+    .about-strip p { color:var(--dark2); max-width:600px; font-size:0.95rem; }
+    .since-badge {
+      background:var(--dark);
+      color:var(--gold);
+      padding:1rem 2rem;
+      border-radius:15px;
+      text-align:center;
+      white-space:nowrap;
+    }
+    .since-badge .year { font-size:2.5rem; font-weight:900; font-family:'Playfair Display',serif; }
+    .since-badge .label { font-size:0.8rem; letter-spacing:2px; }
+
+    /* ===== FILTER BAR ===== */
+    .filter-bar {
+      display:flex; gap:0.75rem; flex-wrap:wrap;
+      justify-content:center; margin-bottom:3rem;
+    }
+    .filter-btn {
+      padding:0.6rem 1.4rem; border-radius:30px;
+      border:2px solid #ddd; background:white;
+      color:#666; font-weight:600; cursor:pointer;
+      transition:all 0.25s; font-family:'Poppins',sans-serif;
+      font-size:0.88rem; display:flex; align-items:center; gap:0.4rem;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background:linear-gradient(135deg, var(--gold), var(--gold2));
+      border-color:transparent; color:var(--dark);
+      transform:translateY(-2px); box-shadow:0 5px 20px rgba(212,175,55,0.3);
+    }
+
+    /* ===== PRODUCT/ITEM GRID ===== */
+    .items-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+      gap:1.75rem;
+    }
+    .item-card {
+      background:white; border-radius:20px; overflow:hidden;
+      box-shadow:0 5px 25px rgba(0,0,0,0.07);
+      transition:all 0.35s; position:relative;
+      cursor:pointer;
+    }
+    .item-card:hover { transform:translateY(-10px); box-shadow:0 20px 50px rgba(0,0,0,0.15); }
+    .item-img {
+      width:100%; height:210px; overflow:hidden;
+      background:#f5e6d3;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .item-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+    .item-card:hover .item-img img { transform:scale(1.1); }
+    .item-img .no-img { font-size:3.5rem; }
+    .item-badge {
+      position:absolute; top:1rem; left:1rem;
+      background:linear-gradient(135deg, var(--gold), var(--gold2));
+      color:var(--dark); padding:0.3rem 0.8rem;
+      border-radius:15px; font-size:0.75rem; font-weight:700;
+    }
+    .item-body { padding:1.25rem; }
+    .item-cat { font-size:0.75rem; color:var(--gold); font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:0.3rem; }
+    .item-name { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; margin-bottom:0.4rem; }
+    .item-desc { font-size:0.85rem; color:#888; margin-bottom:1rem; line-height:1.5; }
+    .item-footer { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; }
+    .item-price { font-size:1.2rem; font-weight:800; color:var(--dark); flex-shrink:0; }
+    .item-price .old { font-size:0.82rem; color:#bbb; text-decoration:line-through; display:block; font-weight:400; }
+    .btn-inquire {
+      background:linear-gradient(135deg, var(--dark), var(--dark2)); color:white;
+      border:none; padding:0.65rem 1.1rem;
+      border-radius:25px; font-weight:700;
+      cursor:pointer; font-family:'Poppins',sans-serif;
+      transition:all 0.25s; font-size:0.85rem;
+      white-space:nowrap; flex-shrink:0;
+    }
+    .btn-inquire:hover { background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--dark); transform:scale(1.05); box-shadow:0 5px 20px rgba(212,175,55,0.4); }
+
+    /* ===== SERVICES ===== */
+    .services-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:1.5rem; }
+    .service-card {
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(212,175,55,0.2);
+      border-radius:20px; padding:2rem;
+      text-align:center; transition:all 0.3s;
+    }
+    .service-card:hover {
+      background:rgba(212,175,55,0.1);
+      border-color:var(--gold);
+      transform:translateY(-5px);
+    }
+    .service-icon {
+      width:70px; height:70px;
+      background:linear-gradient(135deg, var(--gold), var(--gold2));
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-size:1.8rem; color:var(--dark);
+      margin:0 auto 1.5rem;
+    }
+    .service-card h3 { font-size:1.15rem; font-weight:700; color:white; margin-bottom:0.5rem; }
+    .service-card p { font-size:0.88rem; color:#aaa; }
+
+    /* ===== DECORATION / LATEST ===== */
+    .decor-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.75rem; }
+    .decor-card {
+      border-radius:20px; overflow:hidden;
+      position:relative; box-shadow:0 5px 25px rgba(0,0,0,0.1);
+      transition:all 0.35s; cursor:pointer;
+      aspect-ratio:4/3;
+    }
+    .decor-card:hover { transform:scale(1.03); box-shadow:0 20px 50px rgba(0,0,0,0.2); }
+    .decor-card img { width:100%; height:100%; object-fit:cover; display:block; }
+    .decor-card .no-img-bg {
+      width:100%; height:100%;
+      background:linear-gradient(135deg, #2d1500, #5c3000);
+      display:flex; align-items:center; justify-content:center;
+      font-size:5rem;
+    }
+    .decor-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(transparent 40%, rgba(0,0,0,0.85));
+      display:flex; flex-direction:column; justify-content:flex-end;
+      padding:1.5rem;
+    }
+    .decor-tag {
+      background:var(--gold); color:var(--dark);
+      padding:0.25rem 0.75rem; border-radius:15px;
+      font-size:0.75rem; font-weight:700;
+      display:inline-block; margin-bottom:0.5rem;
+    }
+    .decor-title { color:white; font-size:1.2rem; font-weight:700; }
+    .decor-sub { color:#ddd; font-size:0.85rem; margin-top:0.2rem; }
+
+    /* ===== RATINGS ===== */
+    .ratings-section { background:var(--white); }
+    .ratings-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; margin-top:2rem; }
+    .rating-card {
+      background:var(--cream); border-radius:16px; padding:1.5rem;
+      border:1px solid rgba(212,175,55,0.15);
+      transition:all 0.3s;
+    }
+    .rating-card:hover { box-shadow:0 8px 30px rgba(0,0,0,0.08); transform:translateY(-3px); }
+    .rating-header { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
+    .rating-avatar {
+      width:50px; height:50px; border-radius:50%;
+      background:linear-gradient(135deg, var(--gold), var(--gold2));
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:1.2rem; color:var(--dark);
+      flex-shrink:0;
+    }
+    .rating-name { font-weight:700; }
+    .rating-event { font-size:0.8rem; color:#888; }
+    .stars { color:var(--gold); font-size:0.9rem; margin-bottom:0.75rem; }
+    .rating-text { font-size:0.9rem; color:#555; line-height:1.6; }
+    .rating-date { font-size:0.78rem; color:#aaa; margin-top:0.75rem; }
+
+    /* Add Rating Form */
+    .add-rating-box {
+      background:var(--cream); border-radius:20px; padding:2rem;
+      border:2px dashed rgba(212,175,55,0.3); margin-top:2.5rem;
+    }
+    .add-rating-box h3 { font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:1.5rem; }
+    .star-select { display:flex; gap:0.5rem; margin-bottom:1rem; }
+    .star-select span { font-size:2rem; cursor:pointer; color:#ddd; transition:color 0.2s; }
+    .star-select span.active { color:var(--gold); }
+
+    /* ===== CONTACT ===== */
+    .contact-grid { display:grid; grid-template-columns:1fr 1.5fr; gap:3rem; }
+    .contact-info-block h3 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:1.5rem; }
+    .contact-item { display:flex; gap:1rem; margin-bottom:1.25rem; align-items:flex-start; }
+    .ci-icon {
+      width:45px; height:45px;
+      background:linear-gradient(135deg, var(--gold), var(--gold2));
+      color:var(--dark); border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1rem; flex-shrink:0;
+    }
+    .ci-info p { font-weight:700; }
+    .ci-info span { font-size:0.85rem; color:#888; }
+    .wa-btn {
+      display:flex; align-items:center; gap:0.75rem;
+      background:#25D366; color:white; padding:1rem 1.5rem;
+      border-radius:14px; font-weight:700; font-size:1rem;
+      text-decoration:none; margin-top:1.5rem; transition:all 0.3s;
+    }
+    .wa-btn:hover { background:#128C7E; transform:translateY(-2px); }
+    .form-group { margin-bottom:1.2rem; }
+    .form-group label { display:block; font-weight:600; margin-bottom:0.4rem; font-size:0.9rem; }
+    .form-group input, .form-group textarea, .form-group select {
+      width:100%; padding:0.9rem 1rem;
+      border:2px solid #eee; border-radius:12px;
+      font-family:'Poppins',sans-serif; font-size:0.95rem;
+      transition:border-color 0.2s; background:#fafafa;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color:var(--gold); outline:none; background:white;
+    }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .btn-submit {
+      width:100%; padding:1rem;
+      background:linear-gradient(135deg, var(--gold), var(--gold2));
+      color:var(--dark); border:none; border-radius:14px;
+      font-size:1.05rem; font-weight:700;
+      font-family:'Poppins',sans-serif;
+      cursor:pointer; transition:all 0.3s;
+      display:flex; align-items:center; justify-content:center; gap:0.5rem;
+    }
+    .btn-submit:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(212,175,55,0.4); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background:var(--dark); color:#FFE0B2;
+      padding:3rem 2rem 1.5rem;
+    }
+    .footer-grid {
+      max-width:1200px; margin:0 auto;
+      display:grid; grid-template-columns:2fr 1fr 1fr; gap:3rem;
+      padding-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand .logo { font-size:1.5rem; margin-bottom:1rem; }
+    .footer-brand p { color:#aaa; font-size:0.88rem; line-height:1.7; }
+    .social-links { display:flex; gap:0.75rem; margin-top:1.25rem; }
+    .social-links a {
+      width:38px; height:38px; border-radius:50%;
+      background:rgba(255,255,255,0.1);
+      display:flex; align-items:center; justify-content:center;
+      color:#FFE0B2; text-decoration:none; transition:all 0.2s;
+    }
+    .social-links a:hover { background:var(--gold); color:var(--dark); }
+    .footer-col h4 { color:var(--gold); font-size:1rem; font-weight:700; margin-bottom:1.25rem; }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { margin-bottom:0.6rem; }
+    .footer-col ul li a { color:#aaa; text-decoration:none; font-size:0.88rem; transition:color 0.2s; }
+    .footer-col ul li a:hover { color:var(--gold); }
+    .footer-bottom { max-width:1200px; margin:1.5rem auto 0; text-align:center; color:#666; font-size:0.85rem; }
+
+    /* ===== WHATSAPP FLOAT ===== */
+    .wa-float {
+      position:fixed; bottom:2rem; right:2rem;
+      background:#25D366; color:white;
+      width:62px; height:62px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.9rem; text-decoration:none;
+      box-shadow:0 5px 25px rgba(37,211,102,0.5);
+      z-index:999; transition:all 0.3s;
+      animation: waPulse 2s infinite;
+    }
+    .wa-float:hover { transform:scale(1.15); background:#128C7E; }
+    @keyframes waPulse {
+      0%,100%{box-shadow:0 5px 25px rgba(37,211,102,0.5)}
+      50%{box-shadow:0 5px 40px rgba(37,211,102,0.8)}
+    }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position:fixed; bottom:2rem; left:50%;
+      transform:translateX(-50%) translateY(80px);
+      background:var(--dark); color:white;
+      padding:1rem 2rem; border-radius:50px;
+      font-weight:600; z-index:9999;
+      transition:transform 0.3s; white-space:nowrap;
+      border-left:4px solid var(--gold);
+    }
+    .toast.show { transform:translateX(-50%) translateY(0); }
+    .toast.success { border-left-color:#2ecc71; }
+    .toast.error { border-left-color:#e74c3c; }
+
+    /* ===== LOGIN MODAL ===== */
+    .overlay {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,0.75); z-index:3000;
+      align-items:center; justify-content:center;
+      backdrop-filter:blur(5px);
+    }
+    .overlay.active { display:flex; }
+    .login-box {
+      background:white; border-radius:24px; padding:2.5rem;
+      width:100%; max-width:380px; text-align:center;
+      animation: popIn 0.3s ease;
+    }
+    .login-box h2 { font-family:'Playfair Display',serif; font-size:1.8rem; margin-bottom:0.5rem; }
+    .login-box p { color:#888; margin-bottom:2rem; font-size:0.9rem; }
+    @keyframes popIn { from{transform:scale(0.85); opacity:0} to{transform:scale(1); opacity:1} }
+
+    /* ===== ADMIN PANEL ===== */
+    .admin-wrap {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,0.8); z-index:2500;
+      overflow-y:auto; padding:2rem 1rem;
+      backdrop-filter:blur(5px);
+    }
+    .admin-wrap.active { display:flex; align-items:flex-start; justify-content:center; }
+    .admin-panel {
+      background:white; border-radius:24px;
+      width:100%; max-width:750px; padding:2rem;
+      animation: popIn 0.3s ease;
+    }
+    .admin-header {
+      display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:1.5rem; padding-bottom:1rem;
+      border-bottom:2px solid #f0f0f0;
+    }
+    .admin-header h2 { font-family:'Playfair Display',serif; font-size:1.6rem; }
+    .close-x {
+      width:38px; height:38px; border-radius:50%;
+      background:#f5f5f5; border:none; font-size:1.1rem;
+      cursor:pointer; transition:all 0.2s;
+    }
+    .close-x:hover { background:#eee; transform:rotate(90deg); }
+    .admin-tabs { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+    .atab {
+      padding:0.5rem 1.1rem; border-radius:20px;
+      border:2px solid #ddd; background:white;
+      color:#666; font-weight:600; cursor:pointer;
+      transition:all 0.2s; font-family:'Poppins',sans-serif;
+      font-size:0.85rem;
+    }
+    .atab.active { background:var(--dark); border-color:var(--dark); color:var(--gold); }
+    .asection { display:none; }
+    .asection.active { display:block; }
+    .items-list { margin-top:1rem; max-height:400px; overflow-y:auto; }
+    .list-item {
+      display:flex; align-items:center; gap:1rem;
+      padding:0.85rem; background:#fafafa; border-radius:12px;
+      margin-bottom:0.6rem;
+    }
+    .list-item img { width:55px; height:55px; object-fit:cover; border-radius:8px; }
+    .list-info { flex:1; }
+    .list-info strong { display:block; font-weight:700; }
+    .list-info span { font-size:0.82rem; color:#888; }
+    .list-actions { display:flex; gap:0.5rem; }
+    .btn-edit { background:#E3F2FD; color:#1976D2; border:none; padding:0.4rem 0.8rem; border-radius:8px; font-weight:600; cursor:pointer; font-family:'Poppins',sans-serif; font-size:0.82rem; }
+    .btn-del { background:#FFEBEE; color:#c62828; border:none; padding:0.4rem 0.8rem; border-radius:8px; font-weight:600; cursor:pointer; font-family:'Poppins',sans-serif; font-size:0.82rem; }
+    .info-box { background:#FFF8E1; border-radius:12px; padding:1.25rem; margin-bottom:1rem; }
+    .info-box p { font-weight:700; margin-bottom:0.4rem; }
+    .info-box small { color:#666; font-size:0.82rem; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp { from{opacity:0; transform:translateY(40px)} to{opacity:1; transform:translateY(0)} }
+    @keyframes fadeInDown { from{opacity:0; transform:translateY(-20px)} to{opacity:1; transform:translateY(0)} }
+    @keyframes fadeInLeft { from{opacity:0; transform:translateX(-40px)} to{opacity:1; transform:translateX(0)} }
+    @keyframes fadeInRight { from{opacity:0; transform:translateX(40px)} to{opacity:1; transform:translateX(0)} }
+    @keyframes zoomIn { from{opacity:0; transform:scale(0.85)} to{opacity:1; transform:scale(1)} }
+    @keyframes shimmer {
+      0%{background-position:-200% center}
+      100%{background-position:200% center}
+    }
+    @keyframes goldPulse {
+      0%,100%{box-shadow:0 0 0 0 rgba(212,175,55,0.4)}
+      50%{box-shadow:0 0 0 15px rgba(212,175,55,0)}
+    }
+    @keyframes float2 {
+      0%,100%{transform:translateY(0px)}
+      50%{transform:translateY(-8px)}
+    }
+    .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal:nth-child(2) { transition-delay:0.1s; }
+    .reveal:nth-child(3) { transition-delay:0.2s; }
+    .reveal:nth-child(4) { transition-delay:0.3s; }
+
+    /* Item cards stagger */
+    .item-card { animation-fill-mode:both; }
+    .item-card:nth-child(1){animation-delay:0.05s}
+    .item-card:nth-child(2){animation-delay:0.1s}
+    .item-card:nth-child(3){animation-delay:0.15s}
+    .item-card:nth-child(4){animation-delay:0.2s}
+
+    /* Gold shimmer on logo */
+    .logo { 
+      background:linear-gradient(90deg, var(--gold) 0%, var(--gold2) 30%, #fff8dc 50%, var(--gold2) 70%, var(--gold) 100%);
+      background-size:200% auto;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      animation:shimmer 4s linear infinite;
+    }
+    .logo span { -webkit-text-fill-color:rgba(255,255,255,0.7); }
+
+    /* Service cards float */
+    .service-card:hover .service-icon { animation:float2 1s ease infinite; }
+
+    /* Gold pulse on CTA buttons */
+    .btn-gold { animation:goldPulse 2.5s infinite; }
+
+    /* Hero badge glow */
+    .hero-badge {
+      animation:fadeInDown 0.8s ease both, goldPulse 3s 0.8s infinite;
+    }
+
+    /* Stat numbers shimmer effect */
+    .stat-num {
+      background:linear-gradient(90deg, var(--gold) 0%, var(--gold2) 50%, var(--gold) 100%);
+      background-size:200% auto;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      animation:shimmer 3s linear infinite;
+    }
+
+    /* Scroll progress bar */
+    #scrollProgress {
+      position:fixed; top:0; left:0; height:3px;
+      background:linear-gradient(90deg,var(--gold),var(--gold2));
+      z-index:9999; transition:width 0.1s;
+      box-shadow:0 0 10px rgba(212,175,55,0.8);
+    }
+
+    /* Decor card tilt */
+    .decor-card { transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s; }
+
+    /* Rating card entry */
+    .rating-card { transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+
+    /* ===== MOBILE ===== */
+    @media(max-width:768px){
+      nav { display:none; }
+      nav.open {
+        display:flex; flex-direction:column;
+        position:absolute; top:75px; left:0; right:0;
+        background:rgba(26,10,0,0.98); padding:1.5rem;
+        gap:1rem; border-bottom:1px solid rgba(212,175,55,0.2);
+      }
+      .hamburger { display:block; }
+      .contact-grid { grid-template-columns:1fr; }
+      .form-row { grid-template-columns:1fr; }
+      .hero-stats { gap:1.5rem; }
+      .footer-grid { grid-template-columns:1fr; gap:2rem; }
+      .about-strip-inner { flex-direction:column; text-align:center; }
+    }
+    @media(max-width:480px){
+      .items-grid { grid-template-columns:1fr; gap:1rem; }
+      .item-img { height:200px; }
+      .item-footer { flex-direction:row; }
+      .btn-inquire { padding:0.7rem 1.2rem; font-size:0.88rem; }
+      .item-price { font-size:1.1rem; }
+      .decor-grid { grid-template-columns:1fr; }
+      .hero-stats { flex-wrap:wrap; gap:1.2rem; }
+      .stat-num { font-size:2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-logo">🪔 Mithla</div>
+    <div class="preloader-sub">LIGHT TENT HOUSE</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<!-- PARTICLES -->
+<div id="scrollProgress"></div>
+<div id="particles"></div>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <i class="fas fa-star" style="color:var(--gold)"></i>
+      <div class="logo-text">
+        Mithla
+        <span>LIGHT TENT HOUSE</span>
+      </div>
+    </a>
+    <button class="hamburger" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+    <nav id="mainNav">
+      <a href="#tent">Tent House</a>
+      <a href="#banquet">Banquet</a>
+      <a href="#decoration">Decoration</a>
+      <a href="#latest">Latest Work</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="#" class="nav-admin" onclick="showLogin(event)"><i class="fas fa-lock"></i> Admin</a>
+    </nav>
+  </div>
+</header>
+
+<!-- FESTIVAL BANNER -->
+<div id="festivalBanner">
+  <span id="bannerText">🎊 Special Offer! Book now and get 15% OFF on all tent house packages!</span>
+  <button class="banner-close" onclick="closeBanner()">✕</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⭐ TRUSTED SINCE 1990</div>
+    <h1>Make Every Event<br><span>Unforgettable</span></h1>
+    <p>Delhi's Premier Tent House & Event Management Service</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num" data-target="35">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="5000">0</div>
+        <div class="stat-label">Events Done</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="98">0</div>
+        <div class="stat-label">% Happy Clients</div>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-gold"><i class="fas fa-calendar-check"></i> Book Now</a>
+      <a href="#tent" class="btn btn-outline"><i class="fas fa-eye"></i> View Services</a>
+    </div>
+  </div>
+  <div class="scroll-indicator" onclick="document.getElementById('tent').scrollIntoView()">
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<div class="about-strip">
+  <div class="about-strip-inner">
+    <div>
+      <h2>Mithla Light Tent House</h2>
+      <p style="margin-top:0.5rem">Since 1990, we have been Delhi's most trusted name for tent house, banquet halls, DJ, lights, and complete event decoration. Your celebration is our commitment.</p>
+    </div>
+    <div class="since-badge">
+      <div class="year">1990</div>
+      <div class="label">ESTABLISHED</div>
+    </div>
+  </div>
+</div>
+
+<!-- TENT HOUSE SECTION -->
+<section class="section section-light" id="tent">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">🎪 TENT HOUSE</div>
+      <h2 class="section-title">Our <span>Tent House</span> Collection</h2>
+      <p class="section-sub">Premium tents, lights, furniture and DJ for your special events</p>
+    </div>
+    <div class="filter-bar reveal" id="tentFilterBar">
+      <button class="filter-btn active" onclick="filterItems('tent','all',this)">All</button>
+      <button class="filter-btn" onclick="filterItems('tent','tent',this)">🎪 Tents</button>
+      <button class="filter-btn" onclick="filterItems('tent','dj',this)">🎵 DJ & Sound</button>
+      <button class="filter-btn" onclick="filterItems('tent','lights',this)">💡 Lights</button>
+      <button class="filter-btn" onclick="filterItems('tent','furniture',this)">🪑 Furniture</button>
+      <button class="filter-btn" onclick="filterItems('tent','generator',this)">⚡ Generator</button>
+    </div>
+    <div class="items-grid reveal" id="tentGrid"></div>
+  </div>
+</section>
+
+<!-- BANQUET HALL SECTION -->
+<section class="section section-white" id="banquet">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">🏛️ BANQUET HALL</div>
+      <h2 class="section-title">Our <span>Banquet</span> Halls</h2>
+      <p class="section-sub">Elegant venues for weddings, birthdays, and corporate events</p>
+    </div>
+    <div class="filter-bar reveal" id="banquetFilterBar">
+      <button class="filter-btn active" onclick="filterItems('banquet','all',this)">All Halls</button>
+      <button class="filter-btn" onclick="filterItems('banquet','wedding',this)">💍 Wedding</button>
+      <button class="filter-btn" onclick="filterItems('banquet','birthday',this)">🎂 Birthday</button>
+      <button class="filter-btn" onclick="filterItems('banquet','corporate',this)">💼 Corporate</button>
+    </div>
+    <div class="items-grid reveal" id="banquetGrid"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag" style="background:rgba(212,175,55,0.15);color:var(--gold)">✨ SERVICES</div>
+      <h2 class="section-title" style="color:white">What We <span>Offer</span></h2>
+      <p class="section-sub">Complete event solutions under one roof</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-tent"></i></div>
+        <h3>Tent Setup</h3>
+        <p>All size tents with complete setup and takedown</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-music"></i></div>
+        <h3>DJ & Sound</h3>
+        <p>Professional DJ system with lighting effects</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+        <h3>Decoration & Lights</h3>
+        <p>Beautiful decoration with LED and fancy lights</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-chair"></i></div>
+        <h3>Furniture Rental</h3>
+        <p>Chairs, tables, stages, mandap and more</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-bolt"></i></div>
+        <h3>Generator</h3>
+        <p>Reliable power backup for all events</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-camera"></i></div>
+        <h3>Full Event Management</h3>
+        <p>End to end event planning and execution</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DECORATION -->
+<section class="section section-light" id="decoration">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">🌸 DECORATION</div>
+      <h2 class="section-title">Our <span>Decoration</span> Work</h2>
+      <p class="section-sub">We make your event look extraordinary</p>
+    </div>
+    <div class="decor-grid reveal" id="decorGrid"></div>
+  </div>
+</section>
+
+<!-- LATEST WORK -->
+<section class="section section-white" id="latest">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">📸 LATEST WORK</div>
+      <h2 class="section-title">Latest <span>Events</span></h2>
+      <p class="section-sub">See what we've been up to recently</p>
+    </div>
+    <div class="decor-grid reveal" id="latestGrid"></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section ratings-section" id="reviews">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">⭐ REVIEWS</div>
+      <h2 class="section-title">What Our <span>Clients</span> Say</h2>
+      <p class="section-sub">Real reviews from real customers</p>
+    </div>
+    <div class="ratings-grid reveal" id="ratingsGrid"></div>
+
+    <!-- Add Review -->
+    <div class="add-rating-box reveal">
+      <h3>⭐ Leave a Review</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="rName" placeholder="Ramesh Ji">
+        </div>
+        <div class="form-group">
+          <label>Event Type</label>
+          <input type="text" id="rEvent" placeholder="e.g. Wedding, Birthday">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Your Rating</label>
+        <div class="star-select" id="starSelect">
+          <span onclick="setRating(1)">★</span>
+          <span onclick="setRating(2)">★</span>
+          <span onclick="setRating(3)">★</span>
+          <span onclick="setRating(4)">★</span>
+          <span onclick="setRating(5)">★</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Your Review</label>
+        <textarea id="rText" rows="3" placeholder="Tell others about your experience..."></textarea>
+      </div>
+      <button class="btn-submit" onclick="submitReview()" style="max-width:250px">
+        <i class="fas fa-star"></i> Submit Review
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section-light" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">📞 CONTACT</div>
+      <h2 class="section-title">Get In <span>Touch</span></h2>
+      <p class="section-sub">Book your event or send us an inquiry</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-info-block">
+        <h3>Let's Plan Your Event!</h3>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="ci-info"><p>Delhi, India</p><span>Visit us anytime</span></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fas fa-phone"></i></div>
+          <div class="ci-info"><p>+91 92134 02729</p><span>Mon–Sun, 8am–10pm</span></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+          <div class="ci-info"><p>mithlalight@gmail.com</p><span>Reply within 24 hours</span></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fas fa-clock"></i></div>
+          <div class="ci-info"><p>Established 1990</p><span>35+ years of trust</span></div>
+        </div>
+        <a href="https://wa.me/919213402729?text=Hello! I want to book an event." class="wa-btn" target="_blank">
+          <i class="fab fa-whatsapp" style="font-size:1.5rem"></i>
+          Chat on WhatsApp
+        </a>
+      </div>
+      <div>
+        <form id="contactForm" onsubmit="sendEmail(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name *</label>
+              <input type="text" name="from_name" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+              <label>Phone *</label>
+              <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" name="reply_to" placeholder="your@email.com" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Event Type</label>
+              <select name="eventType">
+                <option>Wedding</option>
+                <option>Birthday Party</option>
+                <option>Corporate Event</option>
+                <option>Anniversary</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Event Date</label>
+              <input type="date" name="eventDate">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Message *</label>
+            <textarea name="message" rows="4" placeholder="Tell us about your event requirements..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> Send Inquiry
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="logo" href="#" style="margin-bottom:1rem; display:inline-flex">
+        <i class="fas fa-star" style="color:var(--gold)"></i>
+        <div class="logo-text" style="margin-left:0.6rem">
+          Mithla
+          <span>LIGHT TENT HOUSE</span>
+        </div>
+      </a>
+      <p>Since 1990, Delhi's most trusted tent house and event management service. Making your special moments unforgettable.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="https://wa.me/919213402729" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#tent">Tent House</a></li>
+        <li><a href="#banquet">Banquet Hall</a></li>
+        <li><a href="#decoration">Decoration</a></li>
+        <li><a href="#latest">Latest Work</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+919213402729">+91 92134 02729</a></li>
+        <li><a href="mailto:mithlalight@gmail.com">mithlalight@gmail.com</a></li>
+        <li><a href="#contact">Book Now</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Mithla Light Tent House. All rights reserved. | Est. 1990 | Delhi, India</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/919213402729?text=Hello! I want to book an event with Mithla Light Tent House." class="wa-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- LOGIN -->
+<div class="overlay" id="loginOverlay">
+  <div class="login-box">
+    <h2>🔐 Admin Login</h2>
+    <p>Enter password to manage content</p>
+    <div class="form-group">
+      <input type="password" id="adminPass" placeholder="Enter password" style="text-align:center; font-size:1.1rem;">
+    </div>
+    <button class="btn-submit" onclick="doLogin()">Login</button>
+    <p style="margin-top:1rem; font-size:0.82rem; color:#aaa; cursor:pointer;" onclick="closeLogin()">Cancel</p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-wrap" id="adminWrap">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <h2>🛠️ Admin Panel</h2>
+      <button class="close-x" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-tabs">
+      <button class="atab active" onclick="switchTab('addItem')">➕ Add Item</button>
+      <button class="atab" onclick="switchTab('manageItems')">📋 Manage</button>
+      <button class="atab" onclick="switchTab('addDecor')">🌸 Decoration</button>
+      <button class="atab" onclick="switchTab('addLatest')">📸 Latest Work</button>
+      <button class="atab" onclick="switchTab('festival')">🎉 Offer Banner</button>
+      <button class="atab" onclick="switchTab('adminSettings')">⚙️ Settings</button>
+    </div>
+
+    <!-- ADD ITEM -->
+    <div class="asection active" id="addItem">
+      <form id="addItemForm" onsubmit="saveItem(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Item Name *</label>
+            <input type="text" id="iName" placeholder="e.g. Wedding Tent 50x100" required>
+          </div>
+          <div class="form-group">
+            <label>Section *</label>
+            <select id="iSection">
+              <option value="tent">Tent House</option>
+              <option value="banquet">Banquet Hall</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Category</label>
+            <input type="text" id="iCat" placeholder="e.g. tent, dj, lights, wedding">
+          </div>
+          <div class="form-group">
+            <label>Price *</label>
+            <input type="text" id="iPrice" placeholder="e.g. ₹5000/day" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" id="iDesc" placeholder="Brief description">
+        </div>
+        <div class="form-group">
+          <label>Image URL</label>
+          <input type="url" id="iImage" placeholder="https://... (paste image link or imgbb.com)">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Badge/Tag (optional)</label>
+            <input type="text" id="iBadge" placeholder="e.g. Popular, New">
+          </div>
+          <div class="form-group">
+            <label>Old Price (optional)</label>
+            <input type="text" id="iOldPrice" placeholder="e.g. ₹6000/day">
+          </div>
+        </div>
+        <input type="hidden" id="iEditId">
+        <button type="submit" class="btn-submit" id="iSaveBtn">➕ Add Item</button>
+      </form>
+    </div>
+
+    <!-- MANAGE ITEMS -->
+    <div class="asection" id="manageItems">
+      <div style="display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap;">
+        <button class="filter-btn active" onclick="filterAdminList('all',this)" style="font-size:0.82rem">All</button>
+        <button class="filter-btn" onclick="filterAdminList('tent',this)" style="font-size:0.82rem">Tent</button>
+        <button class="filter-btn" onclick="filterAdminList('banquet',this)" style="font-size:0.82rem">Banquet</button>
+      </div>
+      <div class="items-list" id="adminItemsList"></div>
+    </div>
+
+    <!-- ADD DECORATION -->
+    <div class="asection" id="addDecor">
+      <form id="addDecorForm" onsubmit="saveDecor(event)">
+        <div class="form-group">
+          <label>Decoration Title *</label>
+          <input type="text" id="dTitle" placeholder="e.g. Bridal Stage Decoration" required>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" id="dDesc" placeholder="e.g. For wedding, birthday etc.">
+        </div>
+        <div class="form-group">
+          <label>Tag</label>
+          <input type="text" id="dTag" placeholder="e.g. Wedding, Trending, New">
+        </div>
+        <div class="form-group">
+          <label>Image URL *</label>
+          <input type="url" id="dImage" placeholder="https://..." required>
+        </div>
+        <input type="hidden" id="dEditId">
+        <button type="submit" class="btn-submit" id="dSaveBtn">➕ Add Decoration Photo</button>
+      </form>
+      <div class="items-list" id="decorList" style="margin-top:1.5rem"></div>
+    </div>
+
+    <!-- ADD LATEST WORK -->
+    <div class="asection" id="addLatest">
+      <form id="addLatestForm" onsubmit="saveLatest(event)">
+        <div class="form-group">
+          <label>Event Title *</label>
+          <input type="text" id="lTitle" placeholder="e.g. Sharma Wedding — Dec 2025" required>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" id="lDesc" placeholder="e.g. 500 guests, full decoration">
+        </div>
+        <div class="form-group">
+          <label>Tag</label>
+          <input type="text" id="lTag" placeholder="e.g. Wedding, Birthday, Corporate">
+        </div>
+        <div class="form-group">
+          <label>Image URL *</label>
+          <input type="url" id="lImage" placeholder="https://..." required>
+        </div>
+        <input type="hidden" id="lEditId">
+        <button type="submit" class="btn-submit" id="lSaveBtn">➕ Add Latest Work</button>
+      </form>
+      <div class="items-list" id="latestList" style="margin-top:1.5rem"></div>
+    </div>
+
+    <!-- FESTIVAL OFFER -->
+    <div class="asection" id="festival">
+      <div class="form-group">
+        <label>Offer Banner Text</label>
+        <input type="text" id="offerInput" placeholder="e.g. 🎊 Special Offer! Book now and get 15% OFF!">
+      </div>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <button class="btn-submit" style="flex:1" onclick="showBanner()">🎉 Show Banner</button>
+        <button class="btn-submit" style="flex:1; background:#c62828; color:white;" onclick="hideBanner()">✕ Hide Banner</button>
+      </div>
+      <p style="font-weight:700; margin-bottom:0.75rem;">Quick Templates:</p>
+      <div style="display:flex; flex-direction:column; gap:0.5rem;">
+        <button class="filter-btn" onclick="setTpl('🪔 Diwali Special! Book now and get 20% OFF on all packages!')">🪔 Diwali</button>
+        <button class="filter-btn" onclick="setTpl('🎊 Eid Mubarak! Special discount on all tent house bookings!')">🌙 Eid</button>
+        <button class="filter-btn" onclick="setTpl('💍 Wedding Season Special! Free decoration on bookings above ₹50,000!')">💍 Wedding</button>
+        <button class="filter-btn" onclick="setTpl('🎆 New Year Offer! Free DJ upgrade on all bookings this week!')">🎆 New Year</button>
+        <button class="filter-btn" onclick="setTpl('🎂 Birthday Special! Book hall + decoration combo at 10% OFF!')">🎂 Birthday</button>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="asection" id="adminSettings">
+      <div class="info-box">
+        <p>📧 EmailJS Setup</p>
+        <small>Your EmailJS keys are pre-configured. Update only if needed.</small>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>EmailJS Public Key</label>
+          <input type="text" id="sPublicKey" value="2TcFEfkGErvh0hSnW">
+        </div>
+        <div class="form-group">
+          <label>Service ID</label>
+          <input type="text" id="sServiceId" value="service_bfvywir">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Template ID</label>
+        <input type="text" id="sTemplateId" value="template_jupdu6p">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp Number (with country code)</label>
+        <input type="text" id="sWA" value="919213402729">
+      </div>
+      <div class="form-group">
+        <label>New Admin Password (leave blank to keep)</label>
+        <input type="password" id="sNewPass" placeholder="New password">
+      </div>
+      <button class="btn-submit" onclick="saveSettings()">💾 Save Settings</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== CONFIG =====
+(function(){
+  emailjs.init('2TcFEfkGErvh0hSnW');
+})();
+const EMAILJS_SERVICE = 'service_bfvywir';
+const EMAILJS_TEMPLATE = 'template_jupdu6p';
+const WA_NUM = '919213402729';
+const DEFAULT_PASS = 'mithla1990';
+
+// ===== DATA =====
+let tentItems = JSON.parse(localStorage.getItem('mithla_tent') || '[]');
+let banquetItems = JSON.parse(localStorage.getItem('mithla_banquet') || '[]');
+let decorItems = JSON.parse(localStorage.getItem('mithla_decor') || '[]');
+let latestItems = JSON.parse(localStorage.getItem('mithla_latest') || '[]');
+let reviews = JSON.parse(localStorage.getItem('mithla_reviews') || '[]');
+let settings = JSON.parse(localStorage.getItem('mithla_settings') || '{}');
+let selectedRating = 5;
+
+// Default data
+if(tentItems.length === 0){
+  tentItems = [
+    {id:1, name:'Shaadi Tent (50x100)', section:'tent', cat:'tent', price:'₹8,000/day', oldPrice:'', desc:'Elegant white tent for 500 guests with LED lighting', image:'https://images.unsplash.com/photo-1519167758481-83f29da8c13e?w=400', badge:'Popular'},
+    {id:2, name:'Professional DJ System', section:'tent', cat:'dj', price:'₹5,000/day', oldPrice:'', desc:'Full DJ setup with speakers, mixer and disco lights', image:'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400', badge:'Best Seller'},
+    {id:3, name:'LED Fancy Lights', section:'tent', cat:'lights', price:'₹3,000/setup', oldPrice:'', desc:'Beautiful LED and fairy lights for all events', image:'https://images.unsplash.com/photo-1520549233664-03f65c1d1327?w=400', badge:''},
+    {id:4, name:'Chairs & Tables (100 set)', section:'tent', cat:'furniture', price:'₹2,000/day', oldPrice:'', desc:'Premium chairs and tables for 100 guests', image:'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400', badge:''},
+    {id:5, name:'Generator (25KVA)', section:'tent', cat:'generator', price:'₹2,500/day', oldPrice:'', desc:'Reliable power backup for uninterrupted events', image:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400', badge:''},
+  ];
+  localStorage.setItem('mithla_tent', JSON.stringify(tentItems));
+}
+if(banquetItems.length === 0){
+  banquetItems = [
+    {id:1, name:'Grand Wedding Hall', section:'banquet', cat:'wedding', price:'₹25,000/event', oldPrice:'', desc:'Capacity 300 guests, AC, full decoration included', image:'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400', badge:'Popular'},
+    {id:2, name:'Birthday Party Hall', section:'banquet', cat:'birthday', price:'₹12,000/event', oldPrice:'', desc:'Capacity 100 guests, colorful decoration', image:'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400', badge:''},
+    {id:3, name:'Corporate Event Hall', section:'banquet', cat:'corporate', price:'₹18,000/event', oldPrice:'', desc:'Professional setup for meetings and corporate events', image:'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400', badge:'New'},
+  ];
+  localStorage.setItem('mithla_banquet', JSON.stringify(banquetItems));
+}
+if(reviews.length === 0){
+  reviews = [
+    {id:1, name:'Rajesh Sharma', event:'Wedding', rating:5, text:'Mithla Light Tent House made our wedding absolutely magical! The decoration was stunning and the team was very professional. Highly recommended!', date:'March 2025'},
+    {id:2, name:'Priya Gupta', event:'Birthday Party', rating:5, text:'Best tent house in Delhi! They arranged everything perfectly for my daughter\'s birthday. On time, great quality and very affordable.', date:'Jan 2025'},
+    {id:3, name:'Suresh Kumar', event:'Corporate Event', rating:4, text:'Good service and timely setup. The DJ system was top quality. Will definitely book again for future events!', date:'Dec 2024'},
+  ];
+  localStorage.setItem('mithla_reviews', JSON.stringify(reviews));
+}
+
+// ===== INIT =====
+function init(){
+  setTimeout(() => document.getElementById('preloader').classList.add('hide'), 2000);
+  createParticles();
+  renderTent('all');
+  renderBanquet('all');
+  renderDecor();
+  renderLatest();
+  renderReviews();
+  counterAnimation();
+  initScrollReveal();
+  restoreBanner();
+}
+
+// ===== PARTICLES =====
+function createParticles(){
+  const container = document.getElementById('particles');
+  for(let i=0; i<20; i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random()*100+'%';
+    p.style.animationDuration = (8 + Math.random()*15)+'s';
+    p.style.animationDelay = (Math.random()*10)+'s';
+    p.style.width = p.style.height = (2+Math.random()*4)+'px';
+    container.appendChild(p);
+  }
+}
+
+// ===== COUNTER =====
+function counterAnimation(){
+  const counters = document.querySelectorAll('.stat-num');
+  counters.forEach(c => {
+    const target = parseInt(c.dataset.target);
+    let current = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      current += step;
+      if(current >= target){ c.textContent = target + (target===98?'':''); clearInterval(timer); }
+      else c.textContent = Math.floor(current);
+    }, 30);
+  });
+}
+
+// ===== SCROLL REVEAL =====
+function initScrollReveal(){
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+// ===== RENDER FUNCTIONS =====
+function renderItems(items, containerId){
+  const grid = document.getElementById(containerId);
+  if(!items.length){
+    grid.innerHTML = '<p style="color:#aaa;text-align:center;grid-column:1/-1;padding:3rem">No items yet. Add from Admin Panel.</p>';
+    return;
+  }
+  grid.innerHTML = items.map(item => `
+    <div class="item-card">
+      ${item.badge ? `<span class="item-badge">${item.badge}</span>` : ''}
+      <div class="item-img">
+        ${item.image
+          ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<span class=no-img>🎪</span>'">`
+          : '<span class="no-img">🎪</span>'
+        }
+      </div>
+      <div class="item-body">
+        <div class="item-cat">${item.cat || item.section}</div>
+        <div class="item-name">${item.name}</div>
+        <div class="item-desc">${item.desc || ''}</div>
+        <div class="item-footer">
+          <div class="item-price">
+            ${item.oldPrice ? `<span class="old">${item.oldPrice}</span>` : ''}
+            ${item.price}
+          </div>
+          <button class="btn-inquire" onclick="inquireItem('${item.name}','${item.price}')">Inquire</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderTent(cat){
+  const filtered = cat==='all' ? tentItems : tentItems.filter(i=>i.cat===cat);
+  renderItems(filtered, 'tentGrid');
+}
+
+function renderBanquet(cat){
+  const filtered = cat==='all' ? banquetItems : banquetItems.filter(i=>i.cat===cat);
+  renderItems(filtered, 'banquetGrid');
+}
+
+function renderDecor(){
+  const grid = document.getElementById('decorGrid');
+  if(!decorItems.length){
+    grid.innerHTML = '<p style="color:#aaa;text-align:center;grid-column:1/-1;padding:3rem">No decoration photos yet. Add from Admin Panel.</p>';
+    return;
+  }
+  grid.innerHTML = decorItems.map(d => `
+    <div class="decor-card">
+      ${d.image ? `<img src="${d.image}" alt="${d.title}" onerror="this.style.display='none'">` : '<div class="no-img-bg">🌸</div>'}
+      <div class="decor-overlay">
+        ${d.tag ? `<span class="decor-tag">${d.tag}</span>` : ''}
+        <div class="decor-title">${d.title}</div>
+        ${d.desc ? `<div class="decor-sub">${d.desc}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderLatest(){
+  const grid = document.getElementById('latestGrid');
+  if(!latestItems.length){
+    grid.innerHTML = '<p style="color:#aaa;text-align:center;grid-column:1/-1;padding:3rem">No latest work added yet. Add from Admin Panel.</p>';
+    return;
+  }
+  grid.innerHTML = latestItems.map(l => `
+    <div class="decor-card">
+      ${l.image ? `<img src="${l.image}" alt="${l.title}" onerror="this.style.display='none'">` : '<div class="no-img-bg">📸</div>'}
+      <div class="decor-overlay">
+        ${l.tag ? `<span class="decor-tag">${l.tag}</span>` : ''}
+        <div class="decor-title">${l.title}</div>
+        ${l.desc ? `<div class="decor-sub">${l.desc}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderReviews(){
+  const grid = document.getElementById('ratingsGrid');
+  if(!reviews.length){ grid.innerHTML='<p style="color:#aaa;text-align:center;grid-column:1/-1">No reviews yet.</p>'; return; }
+  grid.innerHTML = reviews.map(r => `
+    <div class="rating-card">
+      <div class="rating-header">
+        <div class="rating-avatar">${r.name.charAt(0)}</div>
+        <div>
+          <div class="rating-name">${r.name}</div>
+          <div class="rating-event">${r.event}</div>
+        </div>
+      </div>
+      <div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+      <div class="rating-text">${r.text}</div>
+      <div class="rating-date">${r.date}</div>
+    </div>
+  `).join('');
+}
+
+// ===== FILTERS =====
+function filterItems(type, cat, btn){
+  const bar = document.getElementById(type==='tent'?'tentFilterBar':'banquetFilterBar');
+  bar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(type==='tent') renderTent(cat);
+  else renderBanquet(cat);
+}
+
+// ===== INQUIRE =====
+function inquireItem(name, price){
+  const wa = settings.whatsapp || WA_NUM;
+  const msg = encodeURIComponent(`Hello Mithla! I want to inquire about: ${name} (${price})`);
+  window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
+}
+
+// ===== EMAIL =====
+function sendEmail(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+  btn.disabled = true;
+
+  const serviceId = settings.emailServiceId || EMAILJS_SERVICE;
+  const templateId = settings.emailTemplateId || EMAILJS_TEMPLATE;
+
+  emailjs.sendForm(serviceId, templateId, e.target)
+    .then(() => {
+      showToast('✅ Message sent successfully! We will contact you soon.', 'success');
+      e.target.reset();
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Inquiry';
+      btn.disabled = false;
+    })
+    .catch(err => {
+      console.error('EmailJS Error:', err);
+      showToast('❌ Email failed. Please contact us on WhatsApp.', 'error');
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Inquiry';
+      btn.disabled = false;
+    });
+}
+
+// ===== REVIEWS =====
+function setRating(n){
+  selectedRating = n;
+  document.querySelectorAll('#starSelect span').forEach((s,i) => {
+    s.classList.toggle('active', i < n);
+  });
+}
+setRating(5);
+
+function submitReview(){
+  const name = document.getElementById('rName').value.trim();
+  const event = document.getElementById('rEvent').value.trim();
+  const text = document.getElementById('rText').value.trim();
+  if(!name || !text){ showToast('Please fill name and review!', 'error'); return; }
+
+  reviews.unshift({
+    id: Date.now(), name, event: event||'Event',
+    rating: selectedRating, text,
+    date: new Date().toLocaleDateString('en-IN', {month:'long', year:'numeric'})
+  });
+  localStorage.setItem('mithla_reviews', JSON.stringify(reviews));
+  renderReviews();
+  document.getElementById('rName').value = '';
+  document.getElementById('rEvent').value = '';
+  document.getElementById('rText').value = '';
+  setRating(5);
+  showToast('✅ Review submitted! Thank you.', 'success');
+}
+
+// ===== FESTIVAL BANNER =====
+function restoreBanner(){
+  const saved = localStorage.getItem('mithla_banner');
+  if(saved){ document.getElementById('bannerText').textContent = saved; document.getElementById('festivalBanner').classList.add('active'); }
+}
+function showBanner(){
+  const text = document.getElementById('offerInput').value.trim();
+  if(!text){ showToast('Enter offer text first!', 'error'); return; }
+  document.getElementById('bannerText').textContent = text;
+  document.getElementById('festivalBanner').classList.add('active');
+  localStorage.setItem('mithla_banner', text);
+  showToast('✅ Banner activated!', 'success');
+}
+function hideBanner(){
+  document.getElementById('festivalBanner').classList.remove('active');
+  localStorage.removeItem('mithla_banner');
+  showToast('Banner hidden.', 'success');
+}
+function closeBanner(){ document.getElementById('festivalBanner').classList.remove('active'); }
+function setTpl(text){ document.getElementById('offerInput').value = text; }
+
+// ===== ADMIN LOGIN =====
+function showLogin(e){ e.preventDefault(); document.getElementById('loginOverlay').classList.add('active'); setTimeout(()=>document.getElementById('adminPass').focus(),100); }
+function closeLogin(){ document.getElementById('loginOverlay').classList.remove('active'); document.getElementById('adminPass').value=''; }
+function doLogin(){
+  const pass = document.getElementById('adminPass').value;
+  const correct = settings.adminPass || DEFAULT_PASS;
+  if(pass === correct){ closeLogin(); openAdmin(); }
+  else showToast('Wrong password!', 'error');
+}
+document.getElementById('adminPass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+
+function openAdmin(){
+  document.getElementById('adminWrap').classList.add('active');
+  renderAdminList('all');
+  renderAdminDecorList();
+  renderAdminLatestList();
+}
+function closeAdmin(){ document.getElementById('adminWrap').classList.remove('active'); }
+
+// ===== ADMIN TABS =====
+function switchTab(tab){
+  document.querySelectorAll('.atab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.asection').forEach(s=>s.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
+  event.target.classList.add('active');
+  if(tab==='manageItems') renderAdminList('all');
+  if(tab==='addDecor') renderAdminDecorList();
+  if(tab==='addLatest') renderAdminLatestList();
+}
+
+// ===== ITEM CRUD =====
+function saveItem(e){
+  e.preventDefault();
+  const editId = document.getElementById('iEditId').value;
+  const item = {
+    id: editId ? parseInt(editId) : Date.now(),
+    name: document.getElementById('iName').value,
+    section: document.getElementById('iSection').value,
+    cat: document.getElementById('iCat').value,
+    price: document.getElementById('iPrice').value,
+    oldPrice: document.getElementById('iOldPrice').value,
+    desc: document.getElementById('iDesc').value,
+    image: document.getElementById('iImage').value,
+    badge: document.getElementById('iBadge').value,
+  };
+  const isTent = item.section === 'tent';
+  if(editId){
+    if(isTent) tentItems = tentItems.map(i=>i.id===parseInt(editId)?item:i);
+    else banquetItems = banquetItems.map(i=>i.id===parseInt(editId)?item:i);
+    showToast('Item updated!', 'success');
+  } else {
+    if(isTent) tentItems.push(item);
+    else banquetItems.push(item);
+    showToast('Item added!', 'success');
+  }
+  localStorage.setItem('mithla_tent', JSON.stringify(tentItems));
+  localStorage.setItem('mithla_banquet', JSON.stringify(banquetItems));
+  renderTent('all'); renderBanquet('all');
+  e.target.reset();
+  document.getElementById('iEditId').value='';
+  document.getElementById('iSaveBtn').textContent='➕ Add Item';
+}
+
+function renderAdminList(filter){
+  const all = [...tentItems.map(i=>({...i,_src:'tent'})), ...banquetItems.map(i=>({...i,_src:'banquet'}))];
+  const filtered = filter==='all' ? all : all.filter(i=>i._src===filter);
+  const list = document.getElementById('adminItemsList');
+  if(!filtered.length){ list.innerHTML='<p style="color:#aaa;text-align:center;padding:2rem">No items yet.</p>'; return; }
+  list.innerHTML = filtered.map(item => `
+    <div class="list-item">
+      ${item.image ? `<img src="${item.image}" onerror="this.style.display='none'">` : '<div style="width:55px;height:55px;background:#f5e6d3;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem">🎪</div>'}
+      <div class="list-info">
+        <strong>${item.name}</strong>
+        <span>${item.price} · ${item._src}</span>
+      </div>
+      <div class="list-actions">
+        <button class="btn-edit" onclick="editItem(${item.id},'${item._src}')">Edit</button>
+        <button class="btn-del" onclick="deleteItem(${item.id},'${item._src}')">Del</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterAdminList(filter, btn){
+  document.querySelectorAll('#manageItems .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAdminList(filter);
+}
+
+function editItem(id, src){
+  const arr = src==='tent' ? tentItems : banquetItems;
+  const item = arr.find(i=>i.id===id);
+  if(!item) return;
+  switchTabDirect('addItem');
+  document.getElementById('iName').value = item.name;
+  document.getElementById('iSection').value = item.section;
+  document.getElementById('iCat').value = item.cat;
+  document.getElementById('iPrice').value = item.price;
+  document.getElementById('iOldPrice').value = item.oldPrice;
+  document.getElementById('iDesc').value = item.desc;
+  document.getElementById('iImage').value = item.image;
+  document.getElementById('iBadge').value = item.badge;
+  document.getElementById('iEditId').value = item.id;
+  document.getElementById('iSaveBtn').textContent = '💾 Update Item';
+}
+
+function deleteItem(id, src){
+  if(!confirm('Delete this item?')) return;
+  if(src==='tent') tentItems = tentItems.filter(i=>i.id!==id);
+  else banquetItems = banquetItems.filter(i=>i.id!==id);
+  localStorage.setItem('mithla_tent', JSON.stringify(tentItems));
+  localStorage.setItem('mithla_banquet', JSON.stringify(banquetItems));
+  renderAdminList('all'); renderTent('all'); renderBanquet('all');
+  showToast('Deleted.', 'error');
+}
+
+function switchTabDirect(tab){
+  document.querySelectorAll('.atab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.asection').forEach(s=>s.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
+  document.querySelector('.atab').classList.add('active');
+}
+
+// ===== DECORATION CRUD =====
+function saveDecor(e){
+  e.preventDefault();
+  const editId = document.getElementById('dEditId').value;
+  const item = {
+    id: editId ? parseInt(editId) : Date.now(),
+    title: document.getElementById('dTitle').value,
+    desc: document.getElementById('dDesc').value,
+    tag: document.getElementById('dTag').value,
+    image: document.getElementById('dImage').value,
+  };
+  if(editId){ decorItems = decorItems.map(d=>d.id===parseInt(editId)?item:d); showToast('Updated!','success'); }
+  else { decorItems.push(item); showToast('Decoration photo added!','success'); }
+  localStorage.setItem('mithla_decor', JSON.stringify(decorItems));
+  renderDecor(); renderAdminDecorList();
+  e.target.reset(); document.getElementById('dEditId').value='';
+  document.getElementById('dSaveBtn').textContent='➕ Add Decoration Photo';
+}
+
+function renderAdminDecorList(){
+  const list = document.getElementById('decorList');
+  if(!decorItems.length){ list.innerHTML=''; return; }
+  list.innerHTML = '<p style="font-weight:700;margin-bottom:0.75rem">Added Photos:</p>' + decorItems.map(d=>`
+    <div class="list-item">
+      ${d.image?`<img src="${d.image}" onerror="this.style.display='none'">`:''}
+      <div class="list-info"><strong>${d.title}</strong><span>${d.tag||''}</span></div>
+      <div class="list-actions">
+        <button class="btn-del" onclick="deleteDecor(${d.id})">Del</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function deleteDecor(id){
+  decorItems = decorItems.filter(d=>d.id!==id);
+  localStorage.setItem('mithla_decor', JSON.stringify(decorItems));
+  renderDecor(); renderAdminDecorList();
+  showToast('Deleted.','error');
+}
+
+// ===== LATEST WORK CRUD =====
+function saveLatest(e){
+  e.preventDefault();
+  const editId = document.getElementById('lEditId').value;
+  const item = {
+    id: editId ? parseInt(editId) : Date.now(),
+    title: document.getElementById('lTitle').value,
+    desc: document.getElementById('lDesc').value,
+    tag: document.getElementById('lTag').value,
+    image: document.getElementById('lImage').value,
+  };
+  if(editId){ latestItems = latestItems.map(l=>l.id===parseInt(editId)?item:l); showToast('Updated!','success'); }
+  else { latestItems.unshift(item); showToast('Latest work added!','success'); }
+  localStorage.setItem('mithla_latest', JSON.stringify(latestItems));
+  renderLatest(); renderAdminLatestList();
+  e.target.reset(); document.getElementById('lEditId').value='';
+  document.getElementById('lSaveBtn').textContent='➕ Add Latest Work';
+}
+
+function renderAdminLatestList(){
+  const list = document.getElementById('latestList');
+  if(!latestItems.length){ list.innerHTML=''; return; }
+  list.innerHTML = '<p style="font-weight:700;margin-bottom:0.75rem">Added:</p>' + latestItems.map(l=>`
+    <div class="list-item">
+      ${l.image?`<img src="${l.image}" onerror="this.style.display='none'">`:''}
+      <div class="list-info"><strong>${l.title}</strong><span>${l.tag||''}</span></div>
+      <div class="list-actions">
+        <button class="btn-del" onclick="deleteLatest(${l.id})">Del</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function deleteLatest(id){
+  latestItems = latestItems.filter(l=>l.id!==id);
+  localStorage.setItem('mithla_latest', JSON.stringify(latestItems));
+  renderLatest(); renderAdminLatestList();
+  showToast('Deleted.','error');
+}
+
+// ===== SETTINGS =====
+function saveSettings(){
+  const newPass = document.getElementById('sNewPass').value;
+  settings = {
+    ...settings,
+    emailPublicKey: document.getElementById('sPublicKey').value,
+    emailServiceId: document.getElementById('sServiceId').value,
+    emailTemplateId: document.getElementById('sTemplateId').value,
+    whatsapp: document.getElementById('sWA').value,
+  };
+  if(newPass) settings.adminPass = newPass;
+  localStorage.setItem('mithla_settings', JSON.stringify(settings));
+  if(settings.emailPublicKey) emailjs.init(settings.emailPublicKey);
+  showToast('✅ Settings saved!','success');
+}
+
+// ===== HEADER SCROLL + PROGRESS BAR =====
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+  // Progress bar
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const progress = (scrollTop / scrollHeight) * 100;
+  document.getElementById('scrollProgress').style.width = progress + '%';
+});
+
+// ===== NAV =====
+function toggleNav(){ document.getElementById('mainNav').classList.toggle('open'); }
+
+// ===== TOAST =====
+function showToast(msg, type='success'){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(()=>t.classList.remove('show'), 3500);
+}
+
+// ===== START =====
+init();
+</script>
+</body>
+</html>
